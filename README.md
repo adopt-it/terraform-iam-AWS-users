@@ -31,9 +31,9 @@ For reference, the terraform scripts were run by using MacOS Mojave
 In order to execute properly, we have to first define some variables within [variables.tf](variables.tf) on the root directory:
 | Template | Description |
 | --- | --- | 
-|region||Amazon AWS region to use for running terraform scripts|
-|role_name||Sample role to be created for the different users to be able to assume automatically|
-|users||A hash map of users and their details to be added. Also, the keys are user names, whereas the inner keys are defined in the terraform documentation.|
+| region | Amazon AWS region to use for running terraform scripts. |
+| role_name | Sample role to be created for the different users to be able to assume automatically. |
+| users | A hash map of users and their details to be added. Also, the keys are user names, whereas the inner keys are defined in the terraform documentation. |
 
 
 
