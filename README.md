@@ -155,3 +155,16 @@ module.iam_create_users.aws_iam_policy.assume_role_policy[1]: Creating...
 module.iam_create_users.aws_iam_user_group_membership.this["Felix"]: Creation complete after 1s
 .....
 ```
+
+## Built With 🛠️
+* [Terraform](https://www.terraform.io/) - Delivering infrastructure as code with Terraform.
+* [Amazon Web Services (AWS)](https://aws.amazon.com/console/) - AWS Cloud and Everything you need to access and manage the same.
+## Authors ✒️
+
+* **Carlos Klinsmann** - *First Version*.
+
+## Acknowledgements 🎁
+
+* Github API & valuable resources.
+* Inspiration on the GithHub template: https://gist.githubusercontent.com/Villanuevand/6386899f70346d4580c723232524d35a/raw/8028158f59ba1995b0ca1afd3173bac3df539ca0/README-espa%25C3%25B1ol.md
+* Terraform documentation.
