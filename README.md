@@ -109,23 +109,6 @@ Terraform will perform the following actions:
         }
     }
 
-  # module.iam_create_users.aws_iam_group.user_group[0] will be created
-  + resource "aws_iam_group" "user_group" {
-      + arn       = (known after apply)
-      + id        = (known after apply)
-      + name      = "Developers"
-      + path      = "/"
-      + unique_id = (known after apply)
-    }
-
-  # module.iam_create_users.aws_iam_group.user_group[1] will be created
-  + resource "aws_iam_group" "user_group" {
-      + arn       = (known after apply)
-      + id        = (known after apply)
-      + name      = "Ops"
-      + path      = "/"
-      + unique_id = (known after apply)
-    }
 
   # module.iam_create_users.aws_iam_group_policy_attachment.assume_role_policy_attachment[0] will be created
   + resource "aws_iam_group_policy_attachment" "assume_role_policy_attachment" {
