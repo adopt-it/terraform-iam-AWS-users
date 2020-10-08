@@ -22,9 +22,7 @@ First, some things you will need:
 ```
 Terraform at least v0.13.4 
 You should have a profile configured in your ~/.aws/credentials file
-Amazon console api
 An Amazon AWS account (if you want to test only)
-IAM credentials to login to the AWS account
 ```
 
 For reference, the terraform scripts were run by using MacOS Mojave
