@@ -155,6 +155,10 @@ module.iam_create_users.aws_iam_policy.assume_role_policy[1]: Creating...
 module.iam_create_users.aws_iam_user_group_membership.this["Felix"]: Creation complete after 1s
 .....
 ```
+6. If you want to remove the terraform resources from AWS cloud, you can easily run:
+```
+terraform destroy
+```
 
 ## Built With 🛠️
 * [Terraform](https://www.terraform.io/) - Delivering infrastructure as code with Terraform.
