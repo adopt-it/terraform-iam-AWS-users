@@ -3,7 +3,8 @@
 ## Background
 
 Terraform modules & scripts to create user, groups & roles within AWS IAM. 
-Let's say we have two groups of users. The first group - "Developers", with users: Eugene,
+
+Moreover, let us say we have two groups of users. The first group - "Developers", with users: Eugene,
 Milo, Abigail, Aidan. The second group - "Ops", with users: Santiago, Felix, Morgan.
 
 Furthermore, we want to achive the following tasks:
