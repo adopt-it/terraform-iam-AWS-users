@@ -1,6 +1,6 @@
 # AWS Identity and Access Management (IAM) with Terraform (a sample use case)
 
-### Background
+## Background
 
 Terraform modules & scripts to create user, groups & roles within AWS IAM. 
 
@@ -14,18 +14,19 @@ Furthermore, we want to achive the following tasks:
 - Create roles for each group (users should be able to assume them); not necessary to
 assign any policies to the roles.
 
-### Prerequisites 📋
+## Prerequisites 📋
 
 
 First, some things you will need:
 
 ```
-Ansible at least 2.7
+Terraform at least v0.13.4 
+You should have a profile configured in your ~/.aws/credentials file
 Amazon console api
-An Amazon AWS account
-IAM credentials to login to the AWS account (will be provided)
-Python 3+
-Virtualenv
+An Amazon AWS account (if you want to test only)
+IAM credentials to login to the AWS account
 ```
 
-For reference, the webservice was deployed by using MacOS Mojave
+For reference, the terraform scripts were run by using MacOS Mojave
+
+
