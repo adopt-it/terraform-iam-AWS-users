@@ -76,12 +76,12 @@ Terraform will perform the following actions:
                       + Action    = "sts:AssumeRole"
                       + Effect    = "Allow"
                       + Principal = {
-                          + AWS = "488598619227"
+                          + AWS = "yyyyyyyyy"
                         }
                       + Sid       = ""
                     },
                 ]
-              + Version   = "2012-10-17"
+              + Version   = "yyyy-yy-mmm"
             }
         )
       + create_date           = (known after apply)
@@ -285,9 +285,5 @@ Terraform will perform the following actions:
 Plan: 20 to add, 0 to change, 0 to destroy.
 
 ------------------------------------------------------------------------
-
-Note: You didn't specify an "-out" parameter to save this plan, so Terraform
-can't guarantee that exactly these actions will be performed if
-"terraform apply" is subsequently run.
 ```
 
