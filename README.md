@@ -37,7 +37,7 @@ In order to execute properly, we have to first define some variables within [var
 
 ## How to use 📦
 1. Make sure to configure your amazon credentials in case you want to test
-2. after cloning the repository, at the root level, execute:
+2. After cloning the repository, at the root level, execute:
 ``` 
 terraform init 
 ```
@@ -65,26 +65,6 @@ Resource actions are indicated with the following symbols:
  <= read (data resources)
 
 Terraform will perform the following actions:
-
-  # aws_iam_role.test_role will be created
-  + resource "aws_iam_role" "test_role" {
-      + arn                   = (known after apply)
-      + assume_role_policy    = jsonencode(
-            {
-              + Statement = [
-                  + {
-                      + Action    = "sts:AssumeRole"
-                      + Effect    = "Allow"
-                      + Principal = {
-                          + AWS = "yyyyyyyyy"
-                        }
-                      + Sid       = ""
-                    },
-                ]
-              + Version   = "yyyy-yy-mmm"
-            }
-        )
-    }
 
   # aws_iam_role_policy_attachment.test_role_readonly_access will be created
   + resource "aws_iam_role_policy_attachment" "test_role_readonly_access" {
@@ -155,5 +135,23 @@ Terraform will perform the following actions:
 Plan: 20 to add, 0 to change, 0 to destroy.
 
 ------------------------------------------------------------------------
+....
 ```
-
+5. After revising the terraform actions, run the following to trigger the creation of users:
+```
+terraform apply
+```
+which will show something like this:
+```
+module.iam_create_users.aws_iam_user.this["Milo"]: Creating...
+module.iam_create_users.aws_iam_group.user_group[0]: Creating...
+module.iam_create_users.aws_iam_group.user_group[1]: Creating...
+module.iam_create_users.aws_iam_user.this["Morgan"]: Creating...
+aws_iam_role.test_role: Creating...
+module.iam_create_users.aws_iam_user_group_membership.this["Morgan"]: Creating...
+module.iam_create_users.data.aws_iam_policy_document.assume_role_policy_doc: Read complete after 0s [id=1204094171]
+module.iam_create_users.aws_iam_policy.assume_role_policy[0]: Creating...
+module.iam_create_users.aws_iam_policy.assume_role_policy[1]: Creating...
+module.iam_create_users.aws_iam_user_group_membership.this["Felix"]: Creation complete after 1s
+.....
+```
