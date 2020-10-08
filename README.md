@@ -35,5 +35,259 @@ In order to execute properly, we have to first define some variables within [var
 | role_name | Sample role to be created for the different users to be able to assume automatically. |
 | users | A hash map of users and their details to be added. Also, the keys are user names, whereas the inner keys are defined in the terraform documentation. |
 
+## How to use 📦
+1. Make sure to configure your amazon credentials in case you want to test
+2. after cloning the repository, at the root level, execute:
+``` 
+terraform init 
+```
+to install any dependencies and modules required.
+3. Edit the file [variables.tf](variables.tf) with the required values for the users.
+4. Make sure to proceed first with a dry-run approach to list down the activities and resources from terraform:
+```
+terraform plan
+```
+which will give an output like the following one:
+```
+➜  terraform-iam-AWS-users git:(main) ✗ terraform plan
+Refreshing Terraform state in-memory prior to plan...
+The refreshed state will be used to calculate this plan, but will not be
+persisted to local or remote state storage.
 
+data.aws_caller_identity.current: Refreshing state...
+data.aws_iam_policy_document.user_assume_role_policy: Refreshing state...
+
+------------------------------------------------------------------------
+
+An execution plan has been generated and is shown below.
+Resource actions are indicated with the following symbols:
+  + create
+ <= read (data resources)
+
+Terraform will perform the following actions:
+
+  # aws_iam_role.test_role will be created
+  + resource "aws_iam_role" "test_role" {
+      + arn                   = (known after apply)
+      + assume_role_policy    = jsonencode(
+            {
+              + Statement = [
+                  + {
+                      + Action    = "sts:AssumeRole"
+                      + Effect    = "Allow"
+                      + Principal = {
+                          + AWS = "488598619227"
+                        }
+                      + Sid       = ""
+                    },
+                ]
+              + Version   = "2012-10-17"
+            }
+        )
+      + create_date           = (known after apply)
+      + force_detach_policies = false
+      + id                    = (known after apply)
+      + max_session_duration  = 3600
+      + name                  = "InfraUsers-role"
+      + path                  = "/"
+      + unique_id             = (known after apply)
+    }
+
+  # aws_iam_role_policy_attachment.test_role_readonly_access will be created
+  + resource "aws_iam_role_policy_attachment" "test_role_readonly_access" {
+      + id         = (known after apply)
+      + policy_arn = "arn:aws:iam::aws:policy/IAMReadOnlyAccess"
+      + role       = "InfraUsers-role"
+    }
+
+  # module.iam_create_users.data.aws_iam_policy_document.assume_role_policy_doc will be read during apply
+  # (config refers to values not yet known)
+ <= data "aws_iam_policy_document" "assume_role_policy_doc"  {
+      + id   = (known after apply)
+      + json = (known after apply)
+
+      + statement {
+          + actions   = [
+              + "sts:AssumeRole",
+            ]
+          + resources = [
+              + (known after apply),
+            ]
+        }
+    }
+
+  # module.iam_create_users.aws_iam_group.user_group[0] will be created
+  + resource "aws_iam_group" "user_group" {
+      + arn       = (known after apply)
+      + id        = (known after apply)
+      + name      = "Developers"
+      + path      = "/"
+      + unique_id = (known after apply)
+    }
+
+  # module.iam_create_users.aws_iam_group.user_group[1] will be created
+  + resource "aws_iam_group" "user_group" {
+      + arn       = (known after apply)
+      + id        = (known after apply)
+      + name      = "Ops"
+      + path      = "/"
+      + unique_id = (known after apply)
+    }
+
+  # module.iam_create_users.aws_iam_group_policy_attachment.assume_role_policy_attachment[0] will be created
+  + resource "aws_iam_group_policy_attachment" "assume_role_policy_attachment" {
+      + group      = "Developers"
+      + id         = (known after apply)
+      + policy_arn = (known after apply)
+    }
+
+  # module.iam_create_users.aws_iam_group_policy_attachment.assume_role_policy_attachment[1] will be created
+  + resource "aws_iam_group_policy_attachment" "assume_role_policy_attachment" {
+      + group      = "Ops"
+      + id         = (known after apply)
+      + policy_arn = (known after apply)
+    }
+
+  # module.iam_create_users.aws_iam_policy.assume_role_policy[0] will be created
+  + resource "aws_iam_policy" "assume_role_policy" {
+      + arn         = (known after apply)
+      + description = "Allows the role Developers to be assumed."
+      + id          = (known after apply)
+      + name        = "assume-role-Developers"
+      + path        = "/"
+      + policy      = (known after apply)
+    }
+
+  # module.iam_create_users.aws_iam_policy.assume_role_policy[1] will be created
+  + resource "aws_iam_policy" "assume_role_policy" {
+      + arn         = (known after apply)
+      + description = "Allows the role Ops to be assumed."
+      + id          = (known after apply)
+      + name        = "assume-role-Ops"
+      + path        = "/"
+      + policy      = (known after apply)
+    }
+
+  # module.iam_create_users.aws_iam_user.this["Abigail"] will be created
+  + resource "aws_iam_user" "this" {
+      + arn           = (known after apply)
+      + force_destroy = true
+      + id            = (known after apply)
+      + name          = "Abigail"
+      + path          = "/"
+      + unique_id     = (known after apply)
+    }
+
+  # module.iam_create_users.aws_iam_user.this["Eugene"] will be created
+  + resource "aws_iam_user" "this" {
+      + arn           = (known after apply)
+      + force_destroy = true
+      + id            = (known after apply)
+      + name          = "Eugene"
+      + path          = "/"
+      + unique_id     = (known after apply)
+    }
+
+  # module.iam_create_users.aws_iam_user.this["Felix"] will be created
+  + resource "aws_iam_user" "this" {
+      + arn           = (known after apply)
+      + force_destroy = true
+      + id            = (known after apply)
+      + name          = "Felix"
+      + path          = "/"
+      + unique_id     = (known after apply)
+    }
+
+  # module.iam_create_users.aws_iam_user.this["Milo"] will be created
+  + resource "aws_iam_user" "this" {
+      + arn           = (known after apply)
+      + force_destroy = true
+      + id            = (known after apply)
+      + name          = "Milo"
+      + path          = "/"
+      + unique_id     = (known after apply)
+    }
+
+  # module.iam_create_users.aws_iam_user.this["Morgan"] will be created
+  + resource "aws_iam_user" "this" {
+      + arn           = (known after apply)
+      + force_destroy = true
+      + id            = (known after apply)
+      + name          = "Morgan"
+      + path          = "/"
+      + unique_id     = (known after apply)
+    }
+
+  # module.iam_create_users.aws_iam_user.this["Santiago"] will be created
+  + resource "aws_iam_user" "this" {
+      + arn           = (known after apply)
+      + force_destroy = true
+      + id            = (known after apply)
+      + name          = "Santiago"
+      + path          = "/"
+      + unique_id     = (known after apply)
+    }
+
+  # module.iam_create_users.aws_iam_user_group_membership.this["Abigail"] will be created
+  + resource "aws_iam_user_group_membership" "this" {
+      + groups = [
+          + "Developers",
+        ]
+      + id     = (known after apply)
+      + user   = "Abigail"
+    }
+
+  # module.iam_create_users.aws_iam_user_group_membership.this["Eugene"] will be created
+  + resource "aws_iam_user_group_membership" "this" {
+      + groups = [
+          + "Developers",
+        ]
+      + id     = (known after apply)
+      + user   = "Eugene"
+    }
+
+  # module.iam_create_users.aws_iam_user_group_membership.this["Felix"] will be created
+  + resource "aws_iam_user_group_membership" "this" {
+      + groups = [
+          + "Ops",
+        ]
+      + id     = (known after apply)
+      + user   = "Felix"
+    }
+
+  # module.iam_create_users.aws_iam_user_group_membership.this["Milo"] will be created
+  + resource "aws_iam_user_group_membership" "this" {
+      + groups = [
+          + "Developers",
+        ]
+      + id     = (known after apply)
+      + user   = "Milo"
+    }
+
+  # module.iam_create_users.aws_iam_user_group_membership.this["Morgan"] will be created
+  + resource "aws_iam_user_group_membership" "this" {
+      + groups = [
+          + "Ops",
+        ]
+      + id     = (known after apply)
+      + user   = "Morgan"
+    }
+
+  # module.iam_create_users.aws_iam_user_group_membership.this["Santiago"] will be created
+  + resource "aws_iam_user_group_membership" "this" {
+      + groups = [
+          + "Ops",
+        ]
+      + id     = (known after apply)
+      + user   = "Santiago"
+    }
+
+Plan: 20 to add, 0 to change, 0 to destroy.
+
+------------------------------------------------------------------------
+
+Note: You didn't specify an "-out" parameter to save this plan, so Terraform
+can't guarantee that exactly these actions will be performed if
+"terraform apply" is subsequently run.
+```
 
