@@ -84,13 +84,6 @@ Terraform will perform the following actions:
               + Version   = "yyyy-yy-mmm"
             }
         )
-      + create_date           = (known after apply)
-      + force_detach_policies = false
-      + id                    = (known after apply)
-      + max_session_duration  = 3600
-      + name                  = "InfraUsers-role"
-      + path                  = "/"
-      + unique_id             = (known after apply)
     }
 
   # aws_iam_role_policy_attachment.test_role_readonly_access will be created
@@ -167,112 +160,6 @@ Terraform will perform the following actions:
       + path        = "/"
       + policy      = (known after apply)
     }
-
-  # module.iam_create_users.aws_iam_user.this["Abigail"] will be created
-  + resource "aws_iam_user" "this" {
-      + arn           = (known after apply)
-      + force_destroy = true
-      + id            = (known after apply)
-      + name          = "Abigail"
-      + path          = "/"
-      + unique_id     = (known after apply)
-    }
-
-  # module.iam_create_users.aws_iam_user.this["Eugene"] will be created
-  + resource "aws_iam_user" "this" {
-      + arn           = (known after apply)
-      + force_destroy = true
-      + id            = (known after apply)
-      + name          = "Eugene"
-      + path          = "/"
-      + unique_id     = (known after apply)
-    }
-
-  # module.iam_create_users.aws_iam_user.this["Felix"] will be created
-  + resource "aws_iam_user" "this" {
-      + arn           = (known after apply)
-      + force_destroy = true
-      + id            = (known after apply)
-      + name          = "Felix"
-      + path          = "/"
-      + unique_id     = (known after apply)
-    }
-
-  # module.iam_create_users.aws_iam_user.this["Milo"] will be created
-  + resource "aws_iam_user" "this" {
-      + arn           = (known after apply)
-      + force_destroy = true
-      + id            = (known after apply)
-      + name          = "Milo"
-      + path          = "/"
-      + unique_id     = (known after apply)
-    }
-
-  # module.iam_create_users.aws_iam_user.this["Morgan"] will be created
-  + resource "aws_iam_user" "this" {
-      + arn           = (known after apply)
-      + force_destroy = true
-      + id            = (known after apply)
-      + name          = "Morgan"
-      + path          = "/"
-      + unique_id     = (known after apply)
-    }
-
-  # module.iam_create_users.aws_iam_user.this["Santiago"] will be created
-  + resource "aws_iam_user" "this" {
-      + arn           = (known after apply)
-      + force_destroy = true
-      + id            = (known after apply)
-      + name          = "Santiago"
-      + path          = "/"
-      + unique_id     = (known after apply)
-    }
-
-  # module.iam_create_users.aws_iam_user_group_membership.this["Abigail"] will be created
-  + resource "aws_iam_user_group_membership" "this" {
-      + groups = [
-          + "Developers",
-        ]
-      + id     = (known after apply)
-      + user   = "Abigail"
-    }
-
-  # module.iam_create_users.aws_iam_user_group_membership.this["Eugene"] will be created
-  + resource "aws_iam_user_group_membership" "this" {
-      + groups = [
-          + "Developers",
-        ]
-      + id     = (known after apply)
-      + user   = "Eugene"
-    }
-
-  # module.iam_create_users.aws_iam_user_group_membership.this["Felix"] will be created
-  + resource "aws_iam_user_group_membership" "this" {
-      + groups = [
-          + "Ops",
-        ]
-      + id     = (known after apply)
-      + user   = "Felix"
-    }
-
-  # module.iam_create_users.aws_iam_user_group_membership.this["Milo"] will be created
-  + resource "aws_iam_user_group_membership" "this" {
-      + groups = [
-          + "Developers",
-        ]
-      + id     = (known after apply)
-      + user   = "Milo"
-    }
-
-  # module.iam_create_users.aws_iam_user_group_membership.this["Morgan"] will be created
-  + resource "aws_iam_user_group_membership" "this" {
-      + groups = [
-          + "Ops",
-        ]
-      + id     = (known after apply)
-      + user   = "Morgan"
-    }
-
   # module.iam_create_users.aws_iam_user_group_membership.this["Santiago"] will be created
   + resource "aws_iam_user_group_membership" "this" {
       + groups = [
