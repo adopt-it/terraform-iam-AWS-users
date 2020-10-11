@@ -37,12 +37,18 @@ In order to execute properly, we have to first define some variables within [var
 
 ## How to use 📦
 1. Make sure to configure your amazon credentials in case you want to test
+
+
 2. After cloning the repository, at the root level, execute:
 ``` 
 terraform init 
 ```
 to install any dependencies and modules required.
+
+
 3. Edit the file [variables.tf](variables.tf) with the required values for the users.
+
+
 4. Make sure to proceed first with a dry-run approach to list down the activities and resources from terraform:
 ```
 terraform plan
@@ -137,6 +143,8 @@ Plan: 20 to add, 0 to change, 0 to destroy.
 ------------------------------------------------------------------------
 ....
 ```
+
+
 5. After revising the terraform actions, run the following to trigger the creation of users:
 ```
 terraform apply
@@ -155,6 +163,8 @@ module.iam_create_users.aws_iam_policy.assume_role_policy[1]: Creating...
 module.iam_create_users.aws_iam_user_group_membership.this["Felix"]: Creation complete after 1s
 .....
 ```
+
+
 6. If you want to remove the terraform resources from AWS cloud, you can easily run:
 ```
 terraform destroy
