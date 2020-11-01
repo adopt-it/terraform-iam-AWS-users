@@ -1,10 +1,14 @@
 # Terraform project for deploying a web application by creating the underlying infrastructure
 
-## Tasks
+## Background & Tasks
 
 -   Implementing a terraform configuration to create the required infrastructure on AWS.
 -   Using terraform to 'deploy' the index.html ( application ) on the AWS infrastructure.
 -   Ensuring that the application can only be accessed from: 3.121.56.176
+-   The terraform scripts also create a VPC with two subnets and deploy a light web application which includes:
+    An application load balancer
+    Security groups
+    EC2 instances
 
 ## Prerequisites 📋
 
@@ -14,7 +18,7 @@ First, some things you will need:
 ```
 Terraform at least v0.13.4 
 You should have a profile configured in your ~/.aws/credentials file
-An Amazon AWS account (if you want to test only)
+An Amazon AWS account 
 ```
 
 For reference, the terraform scripts were run by using MacOS Mojave
@@ -23,13 +27,13 @@ For reference, the terraform scripts were run by using MacOS Mojave
 In order to execute properly, we have to first define some variables within [variables.tf](variables.tf) on the root directory:
 | Template | Description |
 | --- | --- | 
-| region | Amazon AWS region to use for running terraform scripts. |
-| role_name | Sample role to be created for the different users to be able to assume automatically. |
-| users | A hash map of users and their details to be added. Also, the keys are user names, whereas the inner keys are defined in the terraform documentation. |
+| public_key_path | Enter the path to the SSH Public Key to add to AWS. |
+| aws_region | Amazon AWS region to use for running terraform scripts. |
+| cidr_blocks | Hosts being permitted to access the application |
+| vpc_cidr_block | VPC cidr block |
 
 ## How to use 📦
-1. Make sure to configure your amazon credentials in case you want to test
-
+1. Make sure to configure your amazon credentials with ```aws configure```.
 
 2. After cloning the repository, at the root level, execute:
 ``` 
@@ -38,7 +42,7 @@ terraform init
 to install any dependencies and modules required.
 
 
-3. Edit the file [variables.tf](variables.tf) with the required values for the users.
+3. Edit the file [variables.tf](variables.tf) with the required values for the infrastructure deployment.
 
 
 4. Make sure to proceed first with a dry-run approach to list down the activities and resources from terraform:
