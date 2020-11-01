@@ -49,15 +49,12 @@ to install any dependencies and modules required.
 ```
 terraform plan
 ```
-which will give an output like the following one:
+which will give an output like the following one to list out the actions to be performed:
 ```
 ➜  terraform-iam-AWS-users git:(main) ✗ terraform plan
 Refreshing Terraform state in-memory prior to plan...
 The refreshed state will be used to calculate this plan, but will not be
 persisted to local or remote state storage.
-
-data.aws_caller_identity.current: Refreshing state...
-data.aws_iam_policy_document.user_assume_role_policy: Refreshing state...
 
 ------------------------------------------------------------------------
 
@@ -66,100 +63,22 @@ Resource actions are indicated with the following symbols:
   + create
  <= read (data resources)
 
-Terraform will perform the following actions:
-
-  # aws_iam_role_policy_attachment.test_role_readonly_access will be created
-  + resource "aws_iam_role_policy_attachment" "test_role_readonly_access" {
-      + id         = (known after apply)
-      + policy_arn = "arn:aws:iam::aws:policy/IAMReadOnlyAccess"
-      + role       = "InfraUsers-role"
-    }
-
-  # module.iam_create_users.data.aws_iam_policy_document.assume_role_policy_doc will be read during apply
-  # (config refers to values not yet known)
- <= data "aws_iam_policy_document" "assume_role_policy_doc"  {
-      + id   = (known after apply)
-      + json = (known after apply)
-
-      + statement {
-          + actions   = [
-              + "sts:AssumeRole",
-            ]
-          + resources = [
-              + (known after apply),
-            ]
-        }
-    }
-
-
-  # module.iam_create_users.aws_iam_group_policy_attachment.assume_role_policy_attachment[0] will be created
-  + resource "aws_iam_group_policy_attachment" "assume_role_policy_attachment" {
-      + group      = "Developers"
-      + id         = (known after apply)
-      + policy_arn = (known after apply)
-    }
-
-  # module.iam_create_users.aws_iam_group_policy_attachment.assume_role_policy_attachment[1] will be created
-  + resource "aws_iam_group_policy_attachment" "assume_role_policy_attachment" {
-      + group      = "Ops"
-      + id         = (known after apply)
-      + policy_arn = (known after apply)
-    }
-
-  # module.iam_create_users.aws_iam_policy.assume_role_policy[0] will be created
-  + resource "aws_iam_policy" "assume_role_policy" {
-      + arn         = (known after apply)
-      + description = "Allows the role Developers to be assumed."
-      + id          = (known after apply)
-      + name        = "assume-role-Developers"
-      + path        = "/"
-      + policy      = (known after apply)
-    }
-
-  # module.iam_create_users.aws_iam_policy.assume_role_policy[1] will be created
-  + resource "aws_iam_policy" "assume_role_policy" {
-      + arn         = (known after apply)
-      + description = "Allows the role Ops to be assumed."
-      + id          = (known after apply)
-      + name        = "assume-role-Ops"
-      + path        = "/"
-      + policy      = (known after apply)
-    }
-  # module.iam_create_users.aws_iam_user_group_membership.this["Santiago"] will be created
-  + resource "aws_iam_user_group_membership" "this" {
-      + groups = [
-          + "Ops",
-        ]
-      + id     = (known after apply)
-      + user   = "Santiago"
-    }
-
-Plan: 20 to add, 0 to change, 0 to destroy.
-
 ------------------------------------------------------------------------
 ....
 ```
 
-
-5. After revising the terraform actions, run the following to trigger the creation of users:
+5. After revising the terraform actions, run the following to trigger the terraform scripts.
 ```
 terraform apply
 ```
-which will show something like this:
+which will apply the terraform configuration to deploy the infrastructure.
 ```
-module.iam_create_users.aws_iam_user.this["Milo"]: Creating...
-module.iam_create_users.aws_iam_group.user_group[0]: Creating...
-module.iam_create_users.aws_iam_group.user_group[1]: Creating...
-module.iam_create_users.aws_iam_user.this["Morgan"]: Creating...
-aws_iam_role.test_role: Creating...
-module.iam_create_users.aws_iam_user_group_membership.this["Morgan"]: Creating...
-module.iam_create_users.data.aws_iam_policy_document.assume_role_policy_doc: Read complete after 0s [id=1204094171]
-module.iam_create_users.aws_iam_policy.assume_role_policy[0]: Creating...
-module.iam_create_users.aws_iam_policy.assume_role_policy[1]: Creating...
-module.iam_create_users.aws_iam_user_group_membership.this["Felix"]: Creation complete after 1s
+resource "aws_instance" "instance" {
+    ami                          = "ami-0d971d62e4d019dcc"
+    arn                          = "arn:aws:ec2:eu-central-1:488598619227:instance/i-0aa998cfa400430c9"
+    associate_public_ip_address  = true
 .....
 ```
-
 
 6. If you want to remove the terraform resources from AWS cloud, you can easily run:
 ```
@@ -176,5 +95,5 @@ terraform destroy
 ## Acknowledgements 🎁
 
 * Github API & valuable resources.
-* Inspiration on the GithHub template: https://gist.githubusercontent.com/Villanuevand/6386899f70346d4580c723232524d35a/raw/8028158f59ba1995b0ca1afd3173bac3df539ca0/README-espa%25C3%25B1ol.md
+* Inspiration on the [GithHub template](https://gist.githubusercontent.com/Villanuevand/6386899f70346d4580c723232524d35a/raw/8028158f59ba1995b0ca1afd3173bac3df539ca0/README-espa%25C3%25B1ol.md) 
 * Terraform documentation.
