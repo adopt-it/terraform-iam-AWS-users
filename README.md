@@ -5,10 +5,9 @@
 -   Implementing a terraform configuration to create the required infrastructure on AWS.
 -   Using terraform to 'deploy' the index.html ( application ) on the AWS infrastructure.
 -   Ensuring that the application can only be accessed from: 3.121.56.176
--   The terraform scripts also create a VPC with two subnets and deploy a light web application which includes:
-    An application load balancer
-    Security groups
-    EC2 instances
+-   The terraform scripts also create a VPC with two subnets and deploy a light web application which includes an application load balances, Security groups
+    and ubuntu 20.04 EC2 instances.
+    - Apache Web Server has been used to execute the application.
 
 ## Prerequisites 📋
 
@@ -31,6 +30,8 @@ In order to execute properly, we have to first define some variables within [var
 | aws_region | Amazon AWS region to use for running terraform scripts. |
 | cidr_blocks | Hosts being permitted to access the application |
 | vpc_cidr_block | VPC cidr block |
+
+in the [instances module](instances/variables.tf), you can also configure the instance default AMI which points to the ubuntu 20.04.
 
 ## How to use 📦
 1. Make sure to configure your amazon credentials with ```aws configure```.
@@ -85,6 +86,7 @@ resource "aws_instance" "instance" {
 terraform destroy
 ```
 
+The project was elaborated with open source technologies and the idea has been to treat the infrastructure as code by deploying the whole VPC landscape including the different configurations for ALB, EC2, Security groups, etc.
 ## Built With 🛠️
 * [Terraform](https://www.terraform.io/) - Delivering infrastructure as code with Terraform.
 * [Amazon Web Services (AWS)](https://aws.amazon.com/console/) - AWS Cloud and Everything you need to access and manage the same.
